@@ -53,6 +53,6 @@ async{
 Future<Reddit> redauth() 
 async{
     Reddit reddit = new Reddit(new Client());
-    reddit.authSetup("uyy22pMXcVYRPQ", "QAfRokyr-qtJ02kbW6xJTuhQxmU");
+    reddit.authSetup("REDACTED", "REDACTED");
     return reddit;
 }
