@@ -13,10 +13,8 @@ Future<String> fetchPost(String assistantId) async {
     // If server returns an OK response, parse the JSON.
     print('got response');
     print(response.body);
-    //throw Exception('done');
     var sitmap = json.decode(response.body);
     String kurl = sitmap[0]['data']['children'][0]['data']['url'];
-    //print (kurl);
     return kurl;
   } else {
     // If that response was not OK, throw an error.
@@ -36,11 +34,10 @@ async{
   do
   {
   Random rnd; //many thanks to u/Anticycloner and u/TheMrGhostx
-  int min = 1;//168;
+  int min = 1;
   int max = 1000;
   rnd = new Random();
   int r = min + rnd.nextInt(max - min);
-  //print (r);
   String assistant = 'Daily Random Kurisu';
   String sterm = '$assistant #$r';
   print(sterm);
