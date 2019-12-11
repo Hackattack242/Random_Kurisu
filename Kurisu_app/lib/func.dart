@@ -38,10 +38,10 @@ async{
   rnd = new Random();
   int r = min + rnd.nextInt(max - min);
   //print (r);
-  String moog = 'daily dose of mugi';
+  String moog = 'Daily Random Kurisu';
   String sterm = '$moog #$r';
   Reddit reddit = await redauth();
-  Map moogMap = await reddit.sub("k_on").search(sterm).fetch().then(mapMoog);
+  Map moogMap = await reddit.sub("Kurisutina").search(sterm).fetch().then(mapMoog);
   var moogId = moogMap['data']['children'][0]['data']['name'];
   print('got id');
   moogId = moogId.substring(3);  
