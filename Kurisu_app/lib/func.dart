@@ -33,19 +33,25 @@ async {
 Future<String> getMug()
 async{ 
   Random rnd;
-  int min = 1;
+  int min = 235;
   int max = 450;
   rnd = new Random();
   int r = min + rnd.nextInt(max - min);
   //print (r);
   String moog = 'Daily Random Kurisu';
   String sterm = '$moog #$r';
+  print(sterm);
   Reddit reddit = await redauth();
   Map moogMap = await reddit.sub("Kurisutina").search(sterm).fetch().then(mapMoog);
+  print("here");
+  print(moogMap);
   var moogId = moogMap['data']['children'][0]['data']['name'];
+  //print(moogId);
   print('got id');
   moogId = moogId.substring(3);  
+  //print(moogId);
   String murl = await fetchPost(moogId);
+  //print("here");
   print(murl);
   return murl;
 
