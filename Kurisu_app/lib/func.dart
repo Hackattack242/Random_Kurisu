@@ -31,20 +31,31 @@ async {
 Future<String> getAssistant()
 async{ 
   Map assistantMap;
-  do
-  {
+  bool date = false;
+  do{
   Random rnd; //many thanks to u/Anticycloner and u/TheMrGhostx
   int min = 1;
   int max = 1000;
   rnd = new Random();
   int r = min + rnd.nextInt(max - min);
   String assistant = 'Daily Random Kurisu';
-  String sterm = '$assistant #$r';
+  String sterm = "";
+  if (r < 168 || date == true)
+  {
+  date = true;
+  int month = 1 + rnd.nextInt(12 - 1);
+  int day = 1 + rnd.nextInt(31 - 1);
+  sterm = '$assistant ($day,$month)';
+  }
+  else{sterm = '$assistant #$r';}
+  
   print(sterm);
   Reddit reddit = await redauth();
+  print("auth successful");
   assistantMap = await reddit.sub("Kurisutina").search(sterm).fetch().then(mapAssistant);
+  print(assistantMap);
   }while(assistantMap['data']['children'].length == 0);
-    var assistantId = assistantMap['data']['children'][0]['data']['name'];
+  var assistantId = assistantMap['data']['children'][0]['data']['name'];
   print('got id');
   assistantId = assistantId.substring(3);  
   String kurl = await fetchPost(assistantId);
