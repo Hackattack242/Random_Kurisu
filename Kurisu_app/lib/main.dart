@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Moog Getter',
+      title: 'Assistant Getter',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.red,
       ),
-      home: MyHomePage(title: 'Press Button For Assistant'),
+      home: MyHomePage(title: 'Press Button To Summon Assistant'),
     );
   }
 }
@@ -44,11 +44,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int moogcount = 0;
-  String murl = 'https://66.media.tumblr.com/4f192393fa6a8bef0158b2089514c2ab/tumblr_oreuve5cnW1w3rqyeo3_400.png';
-  Future<void> _searchmoogs() 
+  int tinacount = 0;
+  String kurl = 'https://i.imgur.com/E8X13s8.png';
+  String text = "Press Button To Summon Assistant";
+  Future<void> _searchtinas() 
   async {
-    murl = await getMug();
+    tinacount++;
+    kurl = await getAssistant();
+    if(tinacount > 1)
+            {
+            text =
+              'You have pushed the button $tinacount times.';
+            }
+            else if (tinacount == 1)
+            {
+            text =
+              'You have pushed the button $tinacount time.';
+            }
     //moogcount = moogcount++;
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -56,7 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      moogcount++;
     });
   }
 
@@ -94,10 +105,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times: $moogcount',
-            ),
-            Image.network(murl),
+            Text(text),
+            Image.network(kurl),
            
           ],
         ),
@@ -105,11 +114,11 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: ()
         {
-          _searchmoogs();
+          _searchtinas();
 
         },
-        tooltip: 'Moog',
-        child: Icon(Icons.audiotrack),
+        tooltip: 'Assistant Summoner',
+        child: Icon(Icons.alternate_email), //Image.asset('assets/images/cog.png'), //Icon(Icons.audiotrack)
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
