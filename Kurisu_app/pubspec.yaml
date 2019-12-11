@@ -19,6 +19,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  date_range_picker: ^1.0.5
 
   
   reddit: ^0.6.0

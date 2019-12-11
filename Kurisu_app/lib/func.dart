@@ -3,6 +3,7 @@ import 'package:reddit/reddit.dart';
 import 'dart:math';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:date_range_picker/date_range_picker.dart' as DateRangePicker;
 
 
 
@@ -43,17 +44,21 @@ async{
   if (r < 168 || date == true)
   {
   date = true;
-  int month = 1 + rnd.nextInt(12 - 1);
-  int day = 1 + rnd.nextInt(31 - 1);
-  sterm = '$assistant ($day,$month)';
+  int month = 1 + rnd.nextInt(12 - 1); //change for 07-01
+  int day = 1 + rnd.nextInt(31 - 1); //problem - no 0 in first slot will fail search
+  sterm = '$assistant ';
+  if(day < 10){sterm = sterm +'(0$day,' ;}
+  else{sterm = sterm +'($day,' ;}
+  if(month < 10) {sterm = sterm +'0$month)';}
+  else{sterm = sterm +'$month)';}
   }
   else{sterm = '$assistant #$r';}
   
   print(sterm);
   Reddit reddit = await redauth();
-  print("auth successful");
+  //print("auth successful");
   assistantMap = await reddit.sub("Kurisutina").search(sterm).fetch().then(mapAssistant);
-  print(assistantMap);
+  //print(assistantMap);
   }while(assistantMap['data']['children'].length == 0);
   var assistantId = assistantMap['data']['children'][0]['data']['name'];
   print('got id');
